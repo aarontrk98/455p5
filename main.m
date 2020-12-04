@@ -104,12 +104,14 @@ f1 = imerode(f1,filter2);    %reducing corruptions
 f1 = imdilate(f1, filter2);
 
 for i = 1:3
-    f1 = imdilate(f1,[1 1 1]);
+    f1 = imdilate(f1,[1 1]);
 end
 
-for i = 1:6
+for i = 1:3
     f1 = imerode(f1,[1 1]);
 end
+
+imtool(f1,[]) %display cleaned up image
 
 f2 = imerode(f1,filter1); %marking tall letters
 
