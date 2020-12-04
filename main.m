@@ -63,3 +63,21 @@ end
 
 imtool(f3,[]) %display processed image
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part2 C
+%
+%Edge Detection
+%
+%Vladimir Shluahrchuk
+%12/04/2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+f4 = imerode(f3,filter2) + imdilate(f3, filter2);
+
+for x = 1:X %unfill the inside of the letters
+    for y = 1:Y
+        if f4(x,y) == 0
+            f4(x,y) = 2;
+        end
+    end
+end
+
+imtool(f4,[])
