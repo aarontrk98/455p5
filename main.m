@@ -1,4 +1,72 @@
-clear all;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 1a
+%
+%Run image "proj5.gif" through a 3x3 median filter and a 3x3 mean
+%filter
+%
+%Thomas Williams
+%12/04/2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%read image properly
+[f_proj, map_proj] = imread("proj5.gif");
+imwrite(f_proj, map_proj, "f0.gif");
+[M,N] = size(f_proj);
+f_proj_0 = zero(M,N);
+
+%x-axis for histograms
+for i = 1:256         
+    xaxis(i) = i - 1;
+end
+
+%filter image
+f_proj_med = medfilt2(f_proj, [3 3]);
+f_proj_3x3 = mean3x3(f_proj,f_proj_0,M,N);
+
+figure(1);imshow(f_proj, map_proj)
+f_proj_hist = hist(f_proj);
+figure(2);plot(xaxis,f_proj_hist)
+
+figure(3);imshow(f_proj_med, map_proj)
+f_proj_med_hist = hist(f_proj_med);
+figure(4);plot(xaxis,f_proj_med_hist)
+
+figure(5);imshow(f_proj_3x3, map_proj)
+f_proj_3x3_hist = hist(f_proj_3x3);
+figure(6);plot(xaxis,f_proj_3x3_hist)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 1b
+%
+%Run image "wheelpepper.gif" through a 3x3 median filter and a 3x3 mean
+%filter
+%
+%Thomas Williams
+%12/04/2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%read image properly
+[f_wheel, map_wheel] = imread("wheelpepper.gif");
+imwrite(f_wheel, map_wheel, "f_new.gif");
+[V,B] = size(f_wheel);
+f_wheel_0 = zero(V,B);
+
+%filter image
+f_wheel_med = medfilt2(f_wheel, [3 3]);
+f_wheel_3x3 = mean3x3(f_wheel,f_wheel_0,V,B);
+
+figure(7);imshow(f_wheel, map_wheel)
+f_wheel_hist = hist(f_wheel);
+figure(8);plot(xaxis, f_wheel_hist)
+
+figure(9);imshow(f_wheel_med, map_wheel)
+f_wheel_med_hist = hist(f_wheel_med);
+figure(10);plot(xaxis, f_wheel_med_hist)
+
+figure(11);imshow(f_wheel_3x3, map_wheel)
+f_wheel_3x3_hist = hist(f_wheel_3x3);
+figure(12);plot(xaxis, f_wheel_3x3_hist)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Part2 a
 %
