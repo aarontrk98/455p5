@@ -12,7 +12,6 @@
 [f_proj, map_proj] = imread("proj5.gif");
 imwrite(f_proj, map_proj, "f0.gif");
 [M,N] = size(f_proj);
-f_proj_0 = zero(M,N);
 
 %x-axis for histograms
 for i = 1:256         
@@ -21,7 +20,7 @@ end
 
 %filter image
 f_proj_med = medfilt2(f_proj, [3 3]);
-f_proj_3x3 = mean3x3(f_proj,f_proj_0,M,N);
+f_proj_3x3 = meanfilter(f_proj,M,N);
 
 figure(1);imshow(f_proj, map_proj)
 f_proj_hist = hist(f_proj);
@@ -49,11 +48,10 @@ figure(6);plot(xaxis,f_proj_3x3_hist)
 [f_wheel, map_wheel] = imread("wheelpepper.gif");
 imwrite(f_wheel, map_wheel, "f_new.gif");
 [V,B] = size(f_wheel);
-f_wheel_0 = zero(V,B);
 
 %filter image
 f_wheel_med = medfilt2(f_wheel, [3 3]);
-f_wheel_3x3 = mean3x3(f_wheel,f_wheel_0,V,B);
+f_wheel_3x3 = meanfilter(f_wheel,V,B);
 
 figure(7);imshow(f_wheel, map_wheel)
 f_wheel_hist = hist(f_wheel);
