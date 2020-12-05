@@ -15,7 +15,7 @@ A(X+1:X+H,Y+1:Y+I) = zeros(H,I); %zero padding
 
 for x = 1:X %move through the whole image
     for y =1:Y
-        if sum(sum(A(x:x+H-1,y:y+I-1).*B)) ~= 0; %if there is more than 1 intersecting pixel set the first pixel location of the filter to 1
+        if sum(sum(A(x:x+H-1,y:y+I-1).*B)) ~= 0 %if there is more than 1 intersecting pixel set the first pixel location of the filter to 1
             A(x,y) = 1;
         else
             A(x,y) = 0; %otherwise set 0
