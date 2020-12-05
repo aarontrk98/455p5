@@ -87,6 +87,7 @@ for x = 1:X %thresholding and inverting
         end
     end
 end
+imtool(f1,[]);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Part2 b
 %
@@ -95,26 +96,28 @@ end
 %Ruike Tang
 %12/04/2020
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-filter1 = ones(45,3); %define filters needed
+filter1 = ones(45,1); %define filters needed
 filter2 = ones(3,3);
 
-f1 = imerode(f1,filter2);    %reducing corruptions
-f1 = imdilate(f1, filter2);
+f1 = erode(f1,filter2);    %reducing corruptions
+f1 = dilate(f1, filter2);
+for i = 1:3
+   f1 = dilate(f1,[1 1]);
+end
 
 for i = 1:3
-    f1 = imdilate(f1,[1 1 1]);
+    f1 = erode(f1,[1 1]);
 end
 
-for i = 1:6
-    f1 = imerode(f1,[1 1]);
-end
+imtool(f1,[]) %display cleaned up image
 
-f2 = imerode(f1,filter1); %marking tall letters
+f2 = erode(f1,filter1); %marking tall letters
 
-f3 = imdilate(f2,filter2).*f1; %reconstruction
+f3 = dilate(f2,filter2).*f1; %reconstruction
+imtool(f3,[])
 
 for i = 1:65
-    f3 = imdilate(f3,filter2).*f1;
+    f3 = dilate(f3,filter2).*f1;
 end
     
 for x = 1:X %inverting the image
@@ -136,7 +139,7 @@ imtool(f3,[]) %display processed image
 %Vladimir Shluahrchuk
 %12/04/2020
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f4 = imerode(f3,filter2) + imdilate(f3, filter2);
+f4 = erode(f3,filter2) + dilate(f3, filter2);
 
 for x = 1:X %unfill the inside of the letters
     for y = 1:Y
